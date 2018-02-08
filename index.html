@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   	<style>
+			* {
+				margin: 0;
+				padding: 0;
+			}
+
+			html, body {
+				height: 100%;
+				overflow: hidden;
+				width: 100%;
+			}
+
+			body {
+				font-family: "Raleway", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  			font-size: 16px;
+				background: #000;
+			}
+
+			h1 {
+				line-height: 1.0;
+			}
+
+			h1 small,
+			h2 small {
+				font-size: 70%;
+				color: inherit;
+			}
+
+			ul {
+				margin: 0;
+				padding: 0;
+				list-style: none;
+			}
+
+			hr {
+				border-color: #aaa;
+				border-width: 2px;
+			}
+
+			img {
+				vertical-align: middle;
+				width: 100%;
+			}
+
+			strong {
+				color: #333;
+			}
+
+			a {
+				text-decoration: underline;
+			}
+
+			h5 {
+				font-weight: 200;
+			}
+
+			a, button,
+			a:focus, button:focus {
+				outline: none !important;
+			}
+			.grid-spacing {
+				margin-top: 20px;
+				margin-bottom: 20px;
+			}
+
+			.spacing {
+				margin-top: 15px;
+				margin-bottom: 15px;
+			}
+
+			.mute {
+ 			 	color: #575757;
+			}
+
+			.upper {
+ 				 text-transform: uppercase;
+			}
+
+			.header-title {
+ 				border-bottom: 4px solid rgb(242,73,73);
+			}
+
+			.link {
+  			-webkit-transition: color 0.2s ease;
+				-moz-transition: color 0.2s ease;
+				transition: color 0.2s ease;
+			}
+
+			.link:hover {
+				color: rgb(242,73,73) !important;
+			}
+
+			.app {
+				display: grid;
+				grid-template-columns: 15% 85%;
+			}
+
+			.left-bar {
+				background: white;
+				height: 100vh;
+				min-height: 100%;
+				padding: 20px;
+				box-shadow: -6px 0px 17px 1px #625858;
+    		z-index: 3;
+			}
+
+			.content {
+				display: grid;
+				grid-template-columns: repeat(4, 1fr);
+				height: 100vh;
+				overflow: hidden;
+			}
+
+			.item {
+				cursor: pointer;
+				height: 100vh;
+				position: relative;
+			}
+			
+			.item .item-content {
+				height: inherit;
+				width: inherit;
+			}
+			
+			.item-content {
+				display: flex;
+				position: relative;
+				align-content: center;
+				color: white;
+				font-family: Helvetica;
+				justify-content: center;
+				transition: transform .4s ease;
+				z-index: 2;
+			}
+			
+			.content-container {
+				align-self: center;
+				color: white;
+				z-index: 2;
+			}
+
+			.content-container .content-title {
+				font-size: 3em;
+				text-shadow: 3px 3px 5px #3e3e3e;
+			}
+
+			.content-container .content-link {
+				font-family: 'Raleway', Georgia;
+				font-size: 1.2em;
+				text-decoration: underline;
+			}
+
+			.item:nth-child(even) > .item-content:after {
+				position: absolute;
+				top: 0;
+				left: 0;
+				content: ' ';
+				opacity: .85;
+				height: 100vh;
+				width: 100%;
+				background-color: #000;
+				z-index: 1;
+			}
+
+			.item:nth-child(odd) > .item-content:after {
+				position: absolute;
+				top: 0;
+				left: 0;
+				content: ' ';
+				opacity: .65;
+				height: 100vh;
+				width: 100%;
+				background-color: #000;
+			}	
+
+			.first {
+				background-image: url(images/raw/ratings.png);
+				background-size: cover;
+				background-repeat: no-repeat;
+			}
+		
+			.project-info {
+				height: 100vh;
+				background: white;
+				transition: transform .3s ease-out .1s;
+				transform: translateY(100%);
+				z-index: 2;
+				position: absolute;
+				top: 0;
+			}
+				
+			.slide-up {
+				transform: translateY(0);
+			}
+			
+			.scale-down {
+				transform: scale(.9);
+			}
+		</style>
+		<link href="https://fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+		<main class="app">
+			<header class="left-bar">
+				<div class="header-title">
+					<h1 class="spacing">
+						<strong>ADAM BIAGIANTI</strong>
+					</h1>
+				</div>
+				<h5 class="spacing sans mute">front-end web developer</h5>
+
+				<div class="grid-spacing" id="header-links">
+					<a class="link" rel="nofollow" target="_blank" href="https://github.com/el-mapache">
+						<strong>code on github</strong>
+					</a>
+				</div>
+			</header>
+			<section class="content">
+				<div id="test" class='item'>
+					<div class="first item-content">
+						<div class="content-container">
+							<h1 class="content-title">RATings</h1>
+							<p class="spacing content-link">view project</p>
+						</div>
+					</div>
+				</div>
+
+				<div class='item'>
+					<div class="first item-content"></div>
+				</div>
+				<div class='item'>
+					<div class="first item-content"></div>
+				</div>
+				<div class='item'>
+					<div class="first item-content"></div>
+				</div>
+
+				<div id="project-info" class="project-info"></div>
+			</section>
+		</main>
+		<script>
+			var infoEl = document.querySelector('.project-info');
+			var containerEl = document.getElementById('test');	
+			var itemEl = containerEl.querySelector('.first.item-content');
+			var contentEl = document.querySelector('.content');
+			var projectClone = null;
+			
+			var lastActive = null;
+			var currentInfoEl = null;
+			var lastInfoEl = null;
+			var cloneFlag = false;
+			
+			projectClone = infoEl.cloneNode();
+			projectClone.setAttribute('data-clone', true);
+			contentEl.appendChild(projectClone);	
+			
+			function findParentByClass(klass, child) {
+				var node = child;
+
+				while(!node.classList.contains(klass)) {
+					node = node.parentNode;
+				}
+
+				return node;
+			}
+
+			contentEl.addEventListener('click', function(event) {
+				var target = event.target;
+
+				if (!target.classList.contains('project-info')) {
+					target = findParentByClass('item-content', target);
+				}
+
+				if (lastActive) {
+					lastActive.classList.remove('scale-down');
+					realInfoEl.classList.remove('slide-up');	
+				}
+				
+				if (lastActive === target || target.id === 'project-info') {
+					lastActive = null;
+					return;
+				}
+
+				realInfoEl = cloneFlag ? projectClone : infoEl; 
+				cloneFlag = !cloneFlag;
+				
+				var positionInfo = target.getBoundingClientRect();
+				// cache these properties for convienience
+				var xOffset = positionInfo.x;
+				var width = positionInfo.width;
+				
+
+				realInfoEl.style = `width: ${width}px; left: ${xOffset}px`;
+
+				lastActive = target;
+
+				target.classList.add('scale-down');
+				realInfoEl.classList.add('slide-up');
+			});
+		</script>
+  </body>
+</html>
