@@ -139,7 +139,6 @@
 			.content-container {
 				align-self: center;
 				color: white;
-				z-index: 2;
 			}
 
 			.content-container .content-title {
@@ -185,11 +184,26 @@
 			.project-info {
 				height: 100vh;
 				background: white;
-				transition: transform .3s ease-out .1s;
-				transform: translateY(100%);
-				z-index: 2;
+				transition: transform .3s ease-out;
+				/* z-index: 2; */
 				position: absolute;
 				top: 0;
+			}
+
+			.from-bottom {
+				transform: translateY(100%);
+			}
+
+			.from-right {
+				transform: translateX(100%);
+			}
+
+			.slide-right {
+				transform: translateX(0);
+			}
+
+			.slide-left {
+				transform: translateX(-100%);
 			}
 				
 			.slide-up {
@@ -238,7 +252,7 @@
 					<div class="first item-content"></div>
 				</div>
 
-				<div id="project-info" class="project-info"></div>
+				<div id="project-info" class="project-info from-right"></div>
 			</section>
 		</main>
 		<script>
@@ -252,6 +266,9 @@
 			var currentInfoEl = null;
 			var lastInfoEl = null;
 			var cloneFlag = false;
+
+			var infoInClass = 'slide-right'; // slide-up
+			var itemOutClass = 'slide-left'; // scale-down
 			
 			projectClone = infoEl.cloneNode();
 			projectClone.setAttribute('data-clone', true);
@@ -274,9 +291,11 @@
 					target = findParentByClass('item-content', target);
 				}
 
+				// Remove anomation classes to revert elements to their defaults
 				if (lastActive) {
-					lastActive.classList.remove('scale-down');
-					realInfoEl.classList.remove('slide-up');	
+					lastActive.classList.remove(itemOutClass);
+					realInfoEl.classList.remove(infoInClass);
+					lastActive.style = 'z-index: 2';
 				}
 				
 				if (lastActive === target || target.id === 'project-info') {
@@ -294,11 +313,11 @@
 				
 
 				realInfoEl.style = `width: ${width}px; left: ${xOffset}px`;
-
+				target.style = 'z-index: -1';
 				lastActive = target;
 
-				target.classList.add('scale-down');
-				realInfoEl.classList.add('slide-up');
+				target.classList.add(itemOutClass);
+				realInfoEl.classList.add(infoInClass);
 			});
 		</script>
   </body>
