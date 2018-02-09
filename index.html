@@ -139,6 +139,7 @@
 			.content-container {
 				align-self: center;
 				color: white;
+				z-index: 2;
 			}
 
 			.content-container .content-title {
@@ -159,7 +160,7 @@
 				content: ' ';
 				opacity: .85;
 				height: 100vh;
-				width: 100%;
+				width: 101%;
 				background-color: #000;
 				z-index: 1;
 			}
@@ -171,7 +172,7 @@
 				content: ' ';
 				opacity: .65;
 				height: 100vh;
-				width: 100%;
+				width: 101%;
 				background-color: #000;
 			}	
 
@@ -252,7 +253,22 @@
 					<div class="first item-content"></div>
 				</div>
 
-				<div id="project-info" class="project-info from-right"></div>
+				<div id="project-info" class="project-info from-right">
+						<div class="spacing mute">
+								<button type="button" id="prev-btn" class="btn-nav">
+									<span class="glyphicon glyphicon-chevron-left"></span>
+								</button>
+				
+								<button type="button" id="next-btn" class="btn-nav">
+									<span class="glyphicon glyphicon-chevron-right"></span>
+								</button>
+				
+								<button type="button" id="close-btn" class="btn-nav pull-right">
+									<span class="glyphicon glyphicon-remove"></span>
+								</button>
+								<div id="project-metadata"> <h2 class="sans black"><strong>Transmission</strong></h2> <h5 class="sans"> <small class="upper">w/ </small><span>Express, Backbone</span> </h5> <p class="grid-spacing sans">  <a href="https://github.com/el-mapache/transmission" rel="nofollow" target="_blank" class="black link">view code</a>  </p> <hr class="col-md-1"> <div class="row"> <p class="col-md-11">Using Node's binary websocket library BinaryJS, this application allows for real-time file streaming from one connected client to each of the other connected clients. It chunks a file to the back-end server, and pipes the chunks to each client connection. Files are not stored on the server, they are assembled client-side and saved to the user's computer. The front-end is a small backbone application that utilizes the File API to recreate files from the original chunks of data.</p> </div> <hr class="col-md-1"> <div class="clearfix"></div> </div>
+							</div>
+				</div>
 			</section>
 		</main>
 		<script>
